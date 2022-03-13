@@ -17,7 +17,7 @@ function App() {
   function removeCard(card) {
     console.log(cards.length)
     if(cards.length > 1) {
-      let newCards = cards.filter(c => c.cardNumber !== card.cardNumber);
+      let newCards = cards.filter(c => c.id !== card.id);
       setCards(newCards);
       setSelectedCard(newCards[0]);
     } else {

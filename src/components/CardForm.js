@@ -39,9 +39,6 @@ export default function CardForm(props) {
 
     for (let key in card) {
       document.getElementById(key).style.border = "1px solid black";
-      if (card[key] === "") {
-        document.getElementById(key).style.border = "1px solid red";
-      }
     }
 
     updateInfo(card);
