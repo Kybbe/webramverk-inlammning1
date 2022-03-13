@@ -1,0 +1,221 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+header h1 {
+  margin: 0;
+}
+
+header a {
+  color: #333;
+  text-decoration: none;
+  text-align: left;
+}
+
+.buttonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Home a, .cardForm button {
+  text-decoration: none;
+  text-align: center;
+  padding: 20px;
+  width: 425px;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  border: none;
+  box-shadow: 0px 0px 10px rgb(168, 168, 168);
+
+  transition: background-color 0.3s ease;
+}
+
+.Home a {
+  color: black;
+  background-color: #fff;
+  border: 1px solid black;
+}
+
+.Home a:hover {
+  background-color: rgb(235, 235, 235)
+}
+
+.cardForm button {
+  color: white;
+  background-color: #000000;
+}
+
+.cardForm button:hover {
+  background-color: rgb(31, 31, 31);
+}
+
+.card {
+  width: 425px;
+  height: 250px;
+  background-color: #d8d8d8;
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 40px;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 0px 20px 0px #474747;
+}
+
+.card .cardChip {
+  position: absolute;
+  top: 30px;
+  left: 20px;
+}
+
+.card .cardNumber {
+  position: absolute;
+  top: 120px;
+  left: 20px;
+  margin: 0;
+  font-size: 35px;
+  font-weight: 200;
+}
+
+.card .cardNameLabel {
+  position: absolute;
+  font-size: 0.7em;
+  top: 175px;
+}
+
+.card .cardName {
+  position: absolute;
+  top: 185px;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.card .cardExpiryLabel {
+  position: absolute;
+  font-size: 0.7em;
+  top: 175px;
+  right: 20px;
+}
+
+.card .cardExpiry {
+  position: absolute;
+  top: 185px;
+  right: 20px;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.deleteCard {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 30px;
+  right: 80px;
+  display: none;
+  cursor: pointer;
+}
+
+.selected:hover .deleteCard {
+  display: block;
+}
+
+.Blockchain {
+  background-color: #7f51e3 !important;
+}
+
+.Bitcoin {
+  background-color: #ffb444 !important;
+}
+
+.Ninja {
+  background-color: #333333 !important;
+  color: #bbbbbb !important;
+}
+
+.EVIL {
+  background-color: #db2f4e !important;
+}
+
+.cardMake {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+
+  height: 32px;
+  width: 32px;
+}
+
+.cardStack {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.cardStack .card {
+  cursor: pointer;
+}
+
+.cardForm {
+  width: 425px;
+  margin: 0 auto;
+}
+
+.cardForm input, .cardForm select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid black;
+  background-color: transparent;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+
+.cardForm h4 {
+  margin: 0;
+  margin-bottom: 2px;
+  color: rgb(112, 112, 112);
+  font-size: 0.6em;
+}
+
+.halfInputs, .halfInputsLabels {
+  display: flex;
+  align-items: center;
+}
+
+.halfInputsLabels * {
+  width: 50%;
+}
+
+.halfInputsLabels *:nth-child(1) {
+  width: calc(50% + 5px);
+}
+
+.halfInputsLabels *:nth-child(2) {
+  width: calc(50% - 5px);
+}
+
+.halfInputs > input {
+  width: 50%;
+}
+
+.cardForm #cardExpiry {
+  margin-right: 10px;
+}
