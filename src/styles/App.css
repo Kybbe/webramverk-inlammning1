@@ -130,12 +130,27 @@ header a {
   position: absolute;
   top: 30px;
   right: 80px;
-  display: none;
   cursor: pointer;
+
+  /* Hide trashCan/Delete on every card */
+  display: none; 
+}
+
+.selected .deleteCard {
+  /* Show it on the selected card, but make it invisible */
+  display: unset;
+
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
 }
 
 .selected:hover .deleteCard {
-  display: block;
+  /* Show it fully when hovering over selected card */
+  opacity: 1;
+}
+
+.selected {
+  z-index: 10000;
 }
 
 .Blockchain {
@@ -171,6 +186,21 @@ header a {
 
 .cardStack .card {
   cursor: pointer;
+
+  transition: top 0.5s ease;
+}
+
+.cardStack .movingCard {
+  top: -290px !important;
+  z-index: 10001 !important;
+}
+
+.cardStack .movingCard .cardNumber {
+  top: 120px !important;
+}
+
+.cardStack .card:not(:last-child):hover .cardNumber {
+  top: 10px !important;
 }
 
 .cardForm {

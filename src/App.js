@@ -9,19 +9,18 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
 
   function addCard(card) {
-    card.id = cards.length + 1;
     let newCards = cards.concat(card); ;
     setCards(newCards);
+    setSelectedCard(card); //set selected card to the card just added
   }
 
   function removeCard(card) {
-    console.log(cards.length)
     if(cards.length > 1) {
-      let newCards = cards.filter(c => c.id !== card.id);
+      let newCards = cards.filter(c => c.cardNumber !== card.cardNumber); //remove the card from the cards array
       setCards(newCards);
       setSelectedCard(newCards[0]);
     } else {
-      setCards([]);
+      setCards([]); //if there are no cards left, clear the cards array
       setSelectedCard({});
     }
   }
@@ -37,38 +36,38 @@ function App() {
   } */
 
   function selectCard(card) {
-    setSelectedCard(card);
+    setSelectedCard(card); //set selected card to the card passed in
   }
   
   useEffect(() => {
-    function loadFromLocalStorage() {
-      let cardsFromStorage = JSON.parse(localStorage.getItem('cards'));
+    function loadFromLocalStorage() { //load cards from local storage
+      let cardsFromStorage = JSON.parse(localStorage.getItem('cards')); //get cards from local storage
       console.log("loading from local storage", cardsFromStorage);
 
-      if(cardsFromStorage !== null && cardsFromStorage.length > 0) {
+      if(cardsFromStorage !== null && cardsFromStorage.length > 0) { //if there are cards in local storage
         setCards(cardsFromStorage);
         setSelectedCard(cardsFromStorage[0]);
       }
     }
 
     loadFromLocalStorage();
-  }, [])
+  }, []) //only run once
 
   useEffect(() => {
-    function saveToLocalStorage() {
+    function saveToLocalStorage() { //save cards to local storage
       console.log("saving to local storage", cards);
 
       localStorage.setItem('cards', JSON.stringify(cards));
     }
 
     saveToLocalStorage();
-  }, [cards]);
+  }, [cards]); //run everytime cards changes
 
   return (
     <div className="App">
       <Routes>
         <Route path='*' element={ <Home cards={cards} selectedCard={selectedCard} selectCard={selectCard} removeCard={removeCard} /> } />
-        <Route path='/add' element={ <AddCard addCard={addCard}/> } />
+        <Route path='/add' element={ <AddCard cards={cards} addCard={addCard}/> } />
       </Routes>
     </div>
   );

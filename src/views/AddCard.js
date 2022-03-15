@@ -4,7 +4,7 @@ import CardForm from '../components/CardForm';
 import Top from '../components/Top'
 
 export default function AddCard(props) {
-  const { addCard } = props;
+  const { addCard, cards } = props;
   const [info, setInfo] = useState({});
 
  function updateInfo(newInfo){
@@ -15,7 +15,7 @@ export default function AddCard(props) {
     <div className="addCard">
       <Top headline="Add a new Card" link />
       <Card card={info} />
-      <CardForm addCard={addCard} updateInfo={updateInfo}/>
+      <CardForm addCard={addCard} cards={cards} updateInfo={updateInfo}/>
     </div>
   )
 }

@@ -1,5 +1,9 @@
+import {useNavigate} from 'react-router-dom';
+
 export default function CardForm(props) {
-  const { addCard, updateInfo } = props;
+  const { addCard, cards, updateInfo } = props;
+
+  const navigate = useNavigate();
 
   function addingCard() {
     const card = {
@@ -9,6 +13,8 @@ export default function CardForm(props) {
       cardCvv: document.getElementById("cardCvv").value,
       cardMake: document.getElementById("cardMake").value
     };
+
+    cheat();
 
     //go through each key and if it is empty, add red border around corresponding html element
     for (let key in card) {
@@ -23,9 +29,28 @@ export default function CardForm(props) {
       return;
     }
 
+    //if card.cardNumber matches any card in cards, don't add the card
+    for (let c of cards) {
+      if (card.cardNumber === c.cardNumber) {
+        alert("Card already exists, please try again");
+        return;
+      }
+    }
+
     addCard(card);
     alert("Card added!");
-    window.location.href = "/";
+    navigate("/");
+    //window.location.href = "/";
+  }
+
+  function cheat(){
+    if(document.getElementById("cardNumber").value === "JKL") {
+      document.getElementById("cardNumber").value = Math.round(Math.random() * 10000000000000000);
+      document.getElementById("cardName").value = "John Doe";
+      document.getElementById("cardExpiry").value = "12/20";
+      document.getElementById("cardCvv").value = "123";
+      document.getElementById("cardMake").value = "Ninja Bank";
+    }
   }
 
   function updatePreviewCard() {

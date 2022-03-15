@@ -3,6 +3,7 @@ import bitcoin from '../assets/vendor-bitcoin.svg';
 import blockchain from '../assets/vendor-blockchain.svg';
 import evil from '../assets/vendor-evil.svg';
 import ninja from '../assets/vendor-ninja.svg';
+
 import trash from '../assets/trash.svg';
 
 export default function Card(props) {
@@ -11,7 +12,13 @@ export default function Card(props) {
   var className = "card";
 
   function selectThisCard() {
-    selectCard(card);
+    let cardEl = document.getElementById(card.cardNumber);
+    cardEl.classList.add("movingCard");
+
+    setTimeout(() => {
+      selectCard(card);
+      cardEl.classList.remove("movingCard");
+    }, 500);
   }
 
   function deleteCard() {
@@ -57,30 +64,20 @@ export default function Card(props) {
     }
   }
 
-  return (
-    <div>
-      { inCardStack ? 
-      <div className={className} onClick={selectThisCard} style={{top: (60 * index) + "px", zIndex: index, position: 'absolute', left: "50%", transform: "translateX(-50%)" }}>
-        <img className='cardChip' src={lightChip} alt="Chip" />
-        <img className='cardMake' src={cardMakeLogo} alt="Card Make" />
-        <h2 className="cardNumber">{card.cardNumber ? newCardNumber : "**** **** **** ****"}</h2>
-        <h4 className="cardNameLabel">CARDHOLDER NAME</h4>
-        <h3 className="cardName">{card.cardName ? card.cardName : "Your Name"}</h3>
-        <h4 className="cardExpiryLabel">VALID THRU</h4>
-        <h3 className="cardExpiry">{card.cardExpiry ? card.cardExpiry : "MM/YY"}</h3>
-        <img className='deleteCard' src={trash} alt="delete Card" onClick={deleteCard} />
-      </div>
-        : <div className={className}> 
-        <img className='cardChip' src={lightChip} alt="Chip" />
-        <img className='cardMake' src={cardMakeLogo} alt="Card Make" />
-        <h2 className="cardNumber">{card.cardNumber? newCardNumber : "**** **** **** ****"}</h2>
-        <h4 className="cardNameLabel">CARDHOLDER NAME</h4>
-        <h3 className="cardName">{card.cardName ? card.cardName : "Your Name"}</h3>
-        <h4 className="cardExpiryLabel">VALID THRU</h4>
-        <h3 className="cardExpiry">{card.cardExpiry ? card.cardExpiry : "MM/YY"}</h3>
-        <img className='deleteCard' src={trash} alt="delete Card" onClick={deleteCard} />
-      </div>
-      } 
-    </div>  
+  return (       
+    <div className={className} 
+      onClick={ inCardStack? selectThisCard : null} 
+      style={inCardStack ? {top: (60 * index) + "px", zIndex: index, position: 'absolute', left: "50%", transform: "translateX(-50%)" } : {} } 
+      id={card.cardNumber ? card.cardNumber : ""}
+    >
+      <img className='cardChip' src={lightChip} alt="Chip" />
+      <img className='cardMake' src={cardMakeLogo} alt="Card Make" />
+      <h2 className="cardNumber">{card.cardNumber ? newCardNumber : "**** **** **** ****"}</h2>
+      <h4 className="cardNameLabel">CARDHOLDER NAME</h4>
+      <h3 className="cardName">{card.cardName ? card.cardName : "Your Name"}</h3>
+      <h4 className="cardExpiryLabel">VALID THRU</h4>
+      <h3 className="cardExpiry">{card.cardExpiry ? card.cardExpiry : "MM/YY"}</h3>
+      <img className='deleteCard' src={trash} alt="delete Card" onClick={deleteCard} />
+    </div>
   )
 }
