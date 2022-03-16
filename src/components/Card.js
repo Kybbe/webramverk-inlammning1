@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import lightChip from '../assets/chip-light.svg';
 import bitcoin from '../assets/vendor-bitcoin.svg';
 import blockchain from '../assets/vendor-blockchain.svg';
@@ -10,14 +11,14 @@ export default function Card(props) {
   const {card, inCardStack, selectCard, selectedCard, index, removeCard} = props;
 
   var className = "card";
+  const cardEl = useRef(null);
 
   function selectThisCard() {
-    let cardEl = document.getElementById(card.cardNumber);
-    cardEl.classList.add("movingCard");
+    cardEl.current.classList.add("movingCard");
 
     setTimeout(() => {
       selectCard(card);
-      cardEl.classList.remove("movingCard");
+      cardEl.current.classList.remove("movingCard");
     }, 500);
   }
 
@@ -51,8 +52,8 @@ export default function Card(props) {
   }
 
   if(card.cardNumber !== undefined) { // to add spaces in cardNumber
+    var newCardNumber = card.cardNumber;
     if(!isNaN(card.cardNumber)){
-      var newCardNumber = card.cardNumber;
       if(card.cardNumber.length >= 4) {
         var results = card.cardNumber.match(/\d{4}/g);
         //get the last digits, which are not included in results
@@ -69,6 +70,7 @@ export default function Card(props) {
       onClick={ inCardStack? selectThisCard : null} 
       style={inCardStack ? {top: (60 * index) + "px", zIndex: index, position: 'absolute', left: "50%", transform: "translateX(-50%)" } : {} } 
       id={card.cardNumber ? card.cardNumber : ""}
+      ref={cardEl}
     >
       <img className='cardChip' src={lightChip} alt="Chip" />
       <img className='cardMake' src={cardMakeLogo} alt="Card Make" />
